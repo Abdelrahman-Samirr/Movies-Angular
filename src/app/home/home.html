@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="home">
+        <div class="home__search">
+            <h1>Welcome to our movie app</h1>
+            <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+            <div class="search-bar">
+                <input type="text" pInputText placeholder="Search and explore..." />
+                <button pButton class="btn" type="button" label="Search"></button>
+            </div>
+        </div>
+        <div class="home__movies">
+            <h2>Now Playing</h2>
+            <div class="movies">
+                @for(item of movies(); track item.id){
+                <div class="movie">
+                    <figure><img [src]="'https://image.tmdb.org/t/p/w500' + item.backdrop_path"
+                            alt="{{item.backdrop_path}}"></figure>
+                    <div class="movie__info">
+                        <h4 class="title">{{item.original_title}}</h4>
+                        <div class="movie__date">
+                            <p class="date">{{item.release_date}}</p>
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+                }
+                <p-paginator class="slider" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="300" [rowsPerPageOptions]="[10, 20, 30]" />
+            </div>
+        </div>
+
+    </div>

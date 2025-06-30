@@ -1,0 +1,40 @@
+/* Make menubar border clean */
+.custom-menubar {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+
+  .p-menubar-root-list {
+    margin: 0;
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+
+  .right-menu {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+
+    .p-menubar-root-list {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
+
+
+%flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .container{
+//   @extend %flex-center
+// }

@@ -1,0 +1,14 @@
+<nav>
+    <div class="container">
+        <p-menubar [model]="[]" class="navbar">
+            <ng-template pTemplate="start">
+                <a routerLink="/" class="font-bold text-xl text-primary logo">🎬 Movie App</a>
+            </ng-template>
+
+            <ng-template pTemplate="end">
+                <p-menubar [model]="items" />
+            </ng-template>
+        </p-menubar>
+
+    </div>
+</nav>
