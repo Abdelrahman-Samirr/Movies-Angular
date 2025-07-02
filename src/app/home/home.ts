@@ -3,18 +3,19 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MovieService } from '../movie-service';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-
+import { CommonModule } from '@angular/common';
+import { BadgeModule } from 'primeng/badge';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [InputTextModule, ButtonModule, PaginatorModule],
+  imports: [RouterModule, InputTextModule, ButtonModule, PaginatorModule, CommonModule, BadgeModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class Home implements OnInit {
 
   movieService = inject(MovieService);
-
 
   movies = signal<any[]>([]);
 
@@ -30,13 +31,17 @@ export class Home implements OnInit {
     });
   }
 
-  first: number = 0;
-
-  rows: number = 10;
-
   onPageChange(event: PaginatorState) {
-    this.first = event.first ?? 0;
-    this.rows = event.rows ?? 10;
+    const page = (event.page ?? 0) + 1;
+    this.movieService.getPage(page).subscribe((res: any) => {
+      this.movies.set(res.results);
+    });
+  }
+
+
+
+  getPercentage(p: number) {
+    return Math.round((p / 10) * 100)
   }
 
 }

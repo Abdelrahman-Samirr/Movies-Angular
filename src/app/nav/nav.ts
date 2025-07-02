@@ -11,11 +11,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 
 import { MenubarModule } from 'primeng/menubar';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-nav',
-  imports: [MenubarModule, BadgeModule, AvatarModule, InputTextModule,CommonModule],
+  imports: [RouterModule ,MenubarModule, BadgeModule, AvatarModule, InputTextModule,CommonModule],
   templateUrl: './nav.html',
   styleUrl: './nav.scss'
 })

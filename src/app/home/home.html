@@ -13,10 +13,11 @@
             <div class="movies">
                 @for(item of movies(); track item.id){
                 <div class="movie">
-                    <figure><img [src]="'https://image.tmdb.org/t/p/w500' + item.backdrop_path"
-                            alt="{{item.backdrop_path}}"></figure>
+                    <figure><img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path"
+                            alt="{{item.backdrop_path}}" [routerLink]="['/movie', item.id]"></figure>
                     <div class="movie__info">
                         <h4 class="title">{{item.original_title}}</h4>
+                        <i class="rating" severity="info" pBadge [value]="getPercentage(item.vote_average) + '%'"></i>
                         <div class="movie__date">
                             <p class="date">{{item.release_date}}</p>
                             <i class="fa-regular fa-heart"></i>
@@ -24,7 +25,7 @@
                     </div>
                 </div>
                 }
-                <p-paginator class="slider" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="300" [rowsPerPageOptions]="[10, 20, 30]" />
+                <p-paginator class="slider" (onPageChange)="onPageChange($event)"  [rows]="10" [totalRecords]="300" />
             </div>
         </div>
 

@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="detail-page">
+
+        <div class="movie-detail">
+            <figure><img [src]="'https://image.tmdb.org/t/p/w500' + movie().poster_path" alt="">
+            </figure>
+            <div class="detail__info">
+                <div class="detail__header">
+                    <h1 class="title">{{movie().title}}</h1>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <p class="date">{{movie().release_date}}</p>
+
+                <p-rating class="stars" [(ngModel)]="value" [readonly]="true" />
+                <p class="desc">{{movie().overview}}</p>
+
+                <div class="genres">
+                    @for(item of genres(); track item){
+                    <p-tag class="genre" severity="warn" [value]="item.name" [rounded]="true" />
+                    }
+                </div>
+                <div class="detail__time">
+                    <p><span>Duration:</span> {{movie().runtime}} min</p>
+                    <p><span>Languages:</span> {{movie().spoken_languages[0].name}}</p>
+                    <div class="company-logo"><img
+                            [src]="'https://image.tmdb.org/t/p/w500' + movie().production_companies[0].logo_path"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommended">
+            <h2 class="recommended__header">Recommendations</h2>
+            <p-carousel [value]="recommended()" [numVisible]="4" [numScroll]="1" [circular]="true"
+                [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions" [showIndicators]="false"
+                styleClass="custom-carousel">
+                <!-- here movie declared in let-movie and it represent each item im recommended  -->
+                <ng-template let-movie pTemplate="item">
+                    <div class="movie">
+                        <figure>
+                            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                                [alt]="movie.original_title" [routerLink]="['/movie', movie.id]" />
+                        </figure>
+                        <div class="movie__info">
+                            <h4 class="recommended__movie__title">{{ movie.original_title }}</h4>
+                            <i class="rating" pBadge [value]="getPercentage(movie.vote_average) + '%'"></i>
+                            <div class="movie__date">
+                                <p class="date">{{ movie.release_date }}</p>
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+
+    </div>
+</div>
