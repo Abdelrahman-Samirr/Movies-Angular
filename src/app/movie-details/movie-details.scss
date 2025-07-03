@@ -8,7 +8,6 @@
 .movie-detail {
   @include flex();
   gap: 25px;
-  margin-top: 20px;
   border-bottom: solid 1px rgb(189, 189, 189);
   padding-bottom: 20px;
 }
@@ -106,7 +105,7 @@ img {
 .rating {
   position: absolute;
   top: 4%;
-  right: 8%;
+  right: 10%;
 }
 
 .recommended__movie__title {

@@ -1,42 +1,45 @@
-/* Make menubar border clean */
-.custom-menubar {
-  border: none;
-  box-shadow: none;
-  background: transparent;
+@mixin flex($justify: center, $align: center, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
 
-  .p-menubar-root-list {
-    margin: 0;
-  }
+nav{
+  background-color: #FFE353;
+  margin-bottom: 20px
+}
 
-  .logo {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    text-decoration: none;
-    margin-left: 1rem;
-  }
+.container{
+  @include flex(space-between);
+  padding: 15px 0;
+}
 
-  .right-menu {
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-
-    .p-menubar-root-list {
-      display: flex;
-      gap: 1rem;
-    }
-  }
+a{
+  text-decoration: none;
+  color: black;
 }
 
 .title{
-  cursor: pointer;
-}
-%flex-center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-// .container{
-//   @extend %flex-center
-// }
+.wishlist{
+  position: relative;
+}
+
+.wishlist-icon{
+  margin-right: 10px;
+  scale: 1.5;
+}
+
+.counter{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(150%, -50%);
+  background-color: #ffff;
+  padding: 1.5px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}

@@ -1,7 +1,10 @@
 <nav>
     <div class="container">
-        <a routerLink="/wishlist" class="title" >🎬 Movie App</a>
-        <a routerLink="/movie" class="title" >🎬 Movie detail</a>
-        <a routerLink="/home" class="title" >🎬 home</a>
+        <a routerLink="/home" class="title" >Movie App</a>
+        <a routerLink="/wishlist" class="wishlist" >
+            <i class="fa-solid fa-heart wishlist-icon"></i>
+            Wishlist
+            <p class="counter">{{wishlistService.getCount()}}</p>
+        </a>
     </div>
 </nav>

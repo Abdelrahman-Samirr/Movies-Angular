@@ -4,8 +4,8 @@
             <h1>Welcome to our movie app</h1>
             <p>Millions of movies, TV shows and people to discover. Explore now.</p>
             <div class="search-bar">
-                <input type="text" pInputText placeholder="Search and explore..." />
-                <button pButton class="btn" type="button" label="Search"></button>
+                <input type="text" [value]="searchInput()" pInputText placeholder="Search and explore..." (input)="searchInput.set($any($event.target).value)"/>
+                <button pButton class="btn" type="button" label="Search" [routerLink]="['/search', searchInput()]"></button>
             </div>
         </div>
         <div class="home__movies">
@@ -20,12 +20,19 @@
                         <i class="rating" severity="info" pBadge [value]="getPercentage(item.vote_average) + '%'"></i>
                         <div class="movie__date">
                             <p class="date">{{item.release_date}}</p>
-                            <i class="fa-regular fa-heart"></i>
+                            <div (click)="toggle(item.id)">
+                                @if(isInWishlist(item.id)) {
+                                <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                                } @else {
+                                <i class="fa-regular fa-heart"></i>
+                                }
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 }
-                <p-paginator class="slider" (onPageChange)="onPageChange($event)"  [rows]="10" [totalRecords]="300" />
+                <p-paginator class="slider" (onPageChange)="onPageChange($event)" [rows]="10" [totalRecords]="300" />
             </div>
         </div>
 

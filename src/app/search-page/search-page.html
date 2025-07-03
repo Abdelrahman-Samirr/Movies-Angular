@@ -1,0 +1,38 @@
+<div class="container">
+
+    <div class="search-bar">
+        <input type="text" [value]="searchInput()" pInputText placeholder="Search and explore..." (input)="searchInput.set($any($event.target).value)"/>
+        <button pButton class="btn" type="button" label="Search"
+            [routerLink]="['/search', searchInput()]"></button>
+    </div>
+
+
+    @if(searchResults().length === 0 || searchInput() == '' ){
+    <p class="empty">No results found.</p>
+    }@else{
+    <h2>Search Results for: {{searchInput()}}</h2>
+    <div class="movies">
+        @for(item of searchResults(); track item.id){
+        <div class="movie">
+            <figure><img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="{{item.backdrop_path}}"
+                    [routerLink]="['/movie', item.id]"></figure>
+            <div class="movie__info">
+                <h4 class="title">{{item.original_title}}</h4>
+                <i class="rating" severity="info" pBadge [value]="getPercentage(item.vote_average) + '%'"></i>
+                <div class="movie__date">
+                    <p class="date">{{item.release_date}}</p>
+                    <div (click)="toggle(item.id)">
+                        @if(isInWishlist(item.id)) {
+                        <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                        } @else {
+                        <i class="fa-regular fa-heart"></i>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

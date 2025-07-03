@@ -1,1 +1,33 @@
-<p>movies-wishlist works!</p>
+<div class="container">
+    <h1 class="wishlist__header">Wish list</h1>
+    <div class="cards">
+        @if(movies().length == 0){
+        <div class="empty">
+            <p>No Movies in Wish list</p>
+            <button pButton class="btn" type="button" label="Back to home" routerLink="/home"></button>
+        </div>
+        }@else{
+        @for (movie of movies(); track movie.id){
+        <div class="movie-detail">
+            <figure><img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="" [routerLink]="['/movie', movie.id]">
+            </figure>
+            <div class="detail__info">
+                <div class="detail__header">
+                    <h1 class="title">{{movie.title}}</h1>
+                    <div (click)="toggle(movie.id)">
+                        @if(isInWishlist(movie.id)) {
+                        <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                        } @else {
+                        <i class="fa-regular fa-heart"></i>
+                        }
+                    </div>
+                </div>
+
+                <p class="date">{{movie.release_date}}</p>
+                <p-rating class="stars" [ngModel]="movie.vote_average / 2" [readonly]="true" />
+                <p class="desc">{{movie.overview}}</p>
+            </div>
+        </div>
+        }}
+    </div>
+</div>

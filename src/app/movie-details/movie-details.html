@@ -7,11 +7,17 @@
             <div class="detail__info">
                 <div class="detail__header">
                     <h1 class="title">{{movie().title}}</h1>
-                    <i class="fa-regular fa-heart"></i>
+                    <div (click)="toggle(movie().id)">
+                        @if(isInWishlist(movie().id)) {
+                        <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                        } @else {
+                        <i class="fa-regular fa-heart"></i>
+                        }
+                    </div>
                 </div>
-                <p class="date">{{movie().release_date}}</p>
 
-                <p-rating class="stars" [(ngModel)]="value" [readonly]="true" />
+                <p class="date">{{movie().release_date}}</p>
+                <p-rating class="stars" [ngModel]="movie().vote_average / 2" [readonly]="true" />
                 <p class="desc">{{movie().overview}}</p>
 
                 <div class="genres">
@@ -33,21 +39,27 @@
         <div class="recommended">
             <h2 class="recommended__header">Recommendations</h2>
             <p-carousel [value]="recommended()" [numVisible]="4" [numScroll]="1" [circular]="true"
-                [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions" [showIndicators]="false"
+                [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions" [showIndicators]="true"
                 styleClass="custom-carousel">
-                <!-- here movie declared in let-movie and it represent each item im recommended  -->
-                <ng-template let-movie pTemplate="item">
+                <!-- here mov declared in let-movie and it represent each item im recommended  -->
+                <ng-template let-mov pTemplate="item">
                     <div class="movie">
                         <figure>
-                            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-                                [alt]="movie.original_title" [routerLink]="['/movie', movie.id]" />
+                            <img [src]="'https://image.tmdb.org/t/p/w500' + mov.poster_path"
+                                [alt]="mov.original_title" [routerLink]="['/movie', mov.id]" />
                         </figure>
                         <div class="movie__info">
-                            <h4 class="recommended__movie__title">{{ movie.original_title }}</h4>
-                            <i class="rating" pBadge [value]="getPercentage(movie.vote_average) + '%'"></i>
+                            <h4 class="recommended__movie__title">{{ mov.original_title }}</h4>
+                            <i class="rating" severity="success" pBadge [value]="getPercentage(mov.vote_average) + '%'"></i>
                             <div class="movie__date">
-                                <p class="date">{{ movie.release_date }}</p>
-                                <i class="fa-regular fa-heart"></i>
+                                <p class="date">{{ mov.release_date }}</p>
+                                <div (click)="toggleRecommended(mov.id)">
+                                    @if(isInWishlist(mov.id)) {
+                                    <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                                    } @else {
+                                    <i class="fa-regular fa-heart"></i>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

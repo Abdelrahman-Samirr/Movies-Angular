@@ -1,0 +1,94 @@
+@mixin flex($justify: center, $align: center, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+.wishlist__header {
+  font-size: 32px;
+  margin-bottom: 20px
+}
+
+.cards {
+  @include flex(space-between, center, wrap)
+}
+
+.movie-detail {
+  @include flex();
+  gap: 20px;
+  margin-top: 20px;
+  width: 49%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  height: 350px;
+}
+
+.movie-detail figure {
+  width: 35%;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.detail__info {
+  width: 60%;
+  
+}
+
+.detail__header {
+  @include flex(space-between);
+  margin-bottom: 10px;
+}
+
+.detail__header i {
+  scale: 1.5;
+  cursor: pointer;
+}
+
+
+.title {
+  font-size: 32px;
+}
+
+.stars {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-size: 20px;
+  max-width: 100%;
+  height: 140px;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+img {
+  cursor: pointer;
+}
+
+/////////////////////////////////////////////////
+
+.empty {
+  text-align: center;
+  margin-top: 200px;
+  width: 100%;
+}
+
+.btn {
+  margin-left: auto;
+  background-color: #FFE353;
+  border: 1px solid #FFE353;
+  color: black;
+  padding: 8px 100px;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background-color: #ffd500;
+  border: 1px solid #FFE353;
+  color: black;
+}

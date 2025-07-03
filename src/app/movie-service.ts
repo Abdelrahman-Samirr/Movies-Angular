@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -21,10 +21,18 @@ export class MovieService {
   getRecommendedById(id: number) {
     return this.http.get(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${this.apiKey}`);
   }
+
   getReviewsById(id: number) {
     return this.http.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${this.apiKey}`);
   }
+
   getPage(page: number){
     return this.http.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&page=${page}`)
   }
+  
+  getSearchPage(name: string){
+    return this.http.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${name}`)
+  }
+
+  searchInput = signal('');
 }
