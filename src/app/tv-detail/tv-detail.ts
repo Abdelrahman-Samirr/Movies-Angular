@@ -11,25 +11,22 @@ import { BadgeModule } from 'primeng/badge';
 import { CarouselModule } from 'primeng/carousel';
 import { WishlistService } from '../wishlist-service';
 
-
-
 @Component({
-  selector: 'app-movie-details',
+  selector: 'app-tv-detail',
   imports: [RouterModule, CommonModule, RatingModule, FormsModule, Rating, Tag, BadgeModule, CarouselModule],
-  templateUrl: './movie-details.html',
-  styleUrl: './movie-details.scss'
+  templateUrl: './tv-detail.html',
+  styleUrl: './tv-detail.scss'
 })
-export class MovieDetails implements OnInit {
+export class TvDetail implements OnInit {
 
   route = inject(ActivatedRoute);
   movieService = inject(MovieService);
   wishlistService = inject(WishlistService);
 
 
-  movies = computed(() => this.wishlistService.lovableMovies())
-
-  movie = signal<any>(null);
+  tvShow = signal<any>(null);
   genres = signal<any[]>([]);
+
   recommended = signal<any[]>([]);
 
   ngOnInit() {
@@ -38,20 +35,20 @@ export class MovieDetails implements OnInit {
       if (id) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        this.movieService.getMovieById(id).subscribe((mov: any) => {
-          this.movie.set(mov);
-          this.genres.set(mov.genres)
+        this.movieService.getTvShowsById(id).subscribe((tv: any) => {
+          this.tvShow.set(tv);
+          this.genres.set(tv.genres)
 
-          console.log(mov)
+          console.log(tv)
         });
       }
       if (id) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        this.movieService.getRecommendedById(id).subscribe((mov: any) => {
-          this.recommended.set(mov.results);
+        this.movieService.getRecommendedTvShowsById(id).subscribe((tv: any) => {
+          this.recommended.set(tv.results);
 
-          console.log(mov)
+          console.log(tv)
         });
       }
     });
@@ -62,21 +59,21 @@ export class MovieDetails implements OnInit {
   }
 
   toggle() {
-    const movie = this.movie();
-    if (movie) {
-      this.wishlistService.toggleBtn(movie);
+    const tv = this.tvShow();
+    if (tv) {
+      this.wishlistService.toggleTvBtn(tv);
     }
   }
 
   toggleRecommended(id: number) {
-    const movie = this.recommended().find(p => p.id === id);
-    if (movie) {
-      this.wishlistService.toggleBtn(movie);
+    const tv = this.recommended().find(p => p.id === id);
+    if (tv) {
+      this.wishlistService.toggleTvBtn(tv);
     }
   }
 
   isInWishlist(id: number): boolean {
-    return this.wishlistService.lovableMovies().some(p => p.id === id);
+    return this.wishlistService.lovableTvShows().some(p => p.id === id);
   }
 
   responsiveOptions = [
@@ -96,5 +93,4 @@ export class MovieDetails implements OnInit {
       numScroll: 1
     }
   ];
-
 }

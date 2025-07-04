@@ -5,8 +5,29 @@ import { Injectable, signal } from '@angular/core';
 })
 export class WishlistService {
 
-  lovableMovies = signal<any[]>([])
+  lovableMovies = signal<any[]>([]);
 
+  lovableTvShows = signal<any[]>([]);
+
+  toggleTvBtn(tv: any) {
+
+    const currentTv = this.lovableTvShows()
+
+    const isSelected = currentTv.some(p => p.id === tv.id);
+
+    let updated: any[];
+
+    if (isSelected) {
+
+      updated = currentTv.filter(p => p.id !== tv.id)
+
+    } else {
+      updated = [...currentTv, { ...tv}]
+    }
+
+    this.lovableTvShows.set(updated);
+
+  }
   toggleBtn(movie: any) {
 
     const currentMovies = this.lovableMovies()
@@ -28,6 +49,6 @@ export class WishlistService {
   }
 
   getCount(){
-    return this.lovableMovies().length
+    return this.lovableMovies().length + this.lovableTvShows().length
   }
 }

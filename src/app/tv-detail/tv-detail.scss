@@ -1,0 +1,122 @@
+@mixin flex($justify: center, $align: center, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+.movie-detail {
+  @include flex();
+  gap: 25px;
+  border-bottom: solid 1px rgb(189, 189, 189);
+  padding-bottom: 20px;
+}
+
+.movie-detail figure {
+  width: 30%;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.detail__info {
+  width: 70%;
+}
+
+.detail__header {
+  @include flex(space-between);
+  margin-bottom: 10px;
+}
+
+.detail__header i {
+  scale: 1.5;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.stars {
+  margin-top: 35px;
+  margin-bottom: 50px;
+}
+
+.desc {
+  font-size: 24px;
+}
+
+.genres {
+  @include flex(flex-start);
+  gap: 15px;
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
+
+.genre {
+  color: black;
+  padding: 6px 14px;
+}
+
+.detail__time {
+  @include flex(flex-start);
+  gap: 80px;
+}
+
+.detail__time span {
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.company-logo {
+  width: 30%;
+  background-color: rgba(189, 189, 189, 0.256);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+/////////////////////////////
+.recommended {
+  padding: 20px 0;
+
+}
+
+.recommended__header {
+  font-size: 48px;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.movie {
+  margin: 0 7px 8px 7px;
+  position: relative;
+}
+
+img {
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movie__info {
+  padding: 0 10px;
+  padding-top: 5px;
+}
+
+.rating {
+  position: absolute;
+  top: 4%;
+  right: 10%;
+}
+
+.recommended__movie__title {
+  padding: 8px 0;
+}
+
+.movie__date {
+  @include flex(space-between);
+}
+
+.movie__date i {
+  scale: 1.3;
+  cursor: pointer;
+}

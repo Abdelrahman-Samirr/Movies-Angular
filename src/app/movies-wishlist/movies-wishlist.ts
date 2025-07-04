@@ -17,6 +17,7 @@ export class MoviesWishlist {
   wishlistService = inject(WishlistService)
 
   movies = computed(() => this.wishlistService.lovableMovies())
+  tvShows = computed(() => this.wishlistService.lovableTvShows())
 
   toggle(id: number) {
     const movie = this.movies().find(p => p.id === id);
@@ -27,5 +28,16 @@ export class MoviesWishlist {
 
   isInWishlist(id: number): boolean {
     return this.wishlistService.lovableMovies().some(p => p.id === id);
+  }
+
+  toggleTv(id: number) {
+    const tv = this.tvShows().find(p => p.id === id);
+    if (tv) {
+      this.wishlistService.toggleTvBtn(tv);
+    }
+  }
+
+  tvIsInWishlist(id: number): boolean {
+    return this.wishlistService.lovableTvShows().some(p => p.id === id);
   }
 }

@@ -1,10 +1,14 @@
 <nav>
     <div class="container">
         <a routerLink="/home" class="title" >Movie App</a>
+        <div>
+            <a routerLink="/tvshows" class="tv">TV Shows</a>
         <a routerLink="/wishlist" class="wishlist" >
             <i class="fa-solid fa-heart wishlist-icon"></i>
             Wishlist
             <p class="counter">{{wishlistService.getCount()}}</p>
         </a>
+        
+        </div>
     </div>
 </nav>

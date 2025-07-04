@@ -35,4 +35,20 @@ export class MovieService {
   }
 
   searchInput = signal('');
+
+  getTvShows(){
+    return this.http.get(`https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}`)
+  }
+
+  getTvShowsById(id: number){
+    return this.http.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${this.apiKey}`)
+  }
+
+  getTvPage(page: number){
+    return this.http.get(`https://api.themoviedb.org/3/tv/on_the_air?api_key=${this.apiKey}&page=${page}`)
+  }
+
+  getRecommendedTvShowsById(id: number) {
+    return this.http.get(`https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${this.apiKey}`);
+  }
 }

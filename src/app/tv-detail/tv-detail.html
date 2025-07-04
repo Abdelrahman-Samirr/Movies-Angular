@@ -2,13 +2,13 @@
     <div class="detail-page">
 
         <div class="movie-detail">
-            <figure><img [src]="'https://image.tmdb.org/t/p/w500' + movie().poster_path" alt="">
+            <figure><img [src]="'https://image.tmdb.org/t/p/w500' + tvShow().poster_path" alt="">
             </figure>
             <div class="detail__info">
                 <div class="detail__header">
-                    <h1 class="title">{{movie().title}}</h1>
+                    <h1 class="title">{{tvShow().name}}</h1>
                     <div (click)="toggle()">
-                        @if(isInWishlist(movie().id)) {
+                        @if(isInWishlist(tvShow().id)) {
                         <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
                         } @else {
                         <i class="fa-regular fa-heart"></i>
@@ -16,9 +16,9 @@
                     </div>
                 </div>
 
-                <p class="date">{{movie().release_date}}</p>
-                <p-rating class="stars" [ngModel]="movie().vote_average / 2" [readonly]="true" />
-                <p class="desc">{{movie().overview}}</p>
+                <p class="date">{{tvShow().first_air_date}}</p>
+                <p-rating class="stars" [ngModel]="tvShow().vote_average / 2" [readonly]="true" />
+                <p class="desc">{{tvShow().overview}}</p>
 
                 <div class="genres">
                     @for(item of genres(); track item){
@@ -26,10 +26,10 @@
                     }
                 </div>
                 <div class="detail__time">
-                    <p><span>Duration:</span> {{movie().runtime}} min</p>
-                    <p><span>Languages:</span> {{movie().spoken_languages[0].name}}</p>
+                    <p><span>Seasons:</span> {{tvShow().number_of_seasons}} </p>
+                    <p><span>Languages:</span> {{tvShow().spoken_languages[0].name}}</p>
                     <div class="company-logo"><img
-                            [src]="'https://image.tmdb.org/t/p/w500' + movie().production_companies[0].logo_path"
+                            [src]="'https://image.tmdb.org/t/p/w500' + tvShow().production_companies[0].logo_path"
                             alt="">
                     </div>
                 </div>
@@ -41,20 +41,20 @@
             <p-carousel [value]="recommended()" [numVisible]="4" [numScroll]="1" [circular]="true"
                 [autoplayInterval]="4000" [responsiveOptions]="responsiveOptions" [showIndicators]="true"
                 styleClass="custom-carousel">
-                <!-- here mov declared in let-movie and it represent each item im recommended  -->
-                <ng-template let-mov pTemplate="item">
+                <!-- here tv declared in let-tv and it represent each item im recommended  -->
+                <ng-template let-tv pTemplate="item">
                     <div class="movie">
                         <figure>
-                            <img [src]="'https://image.tmdb.org/t/p/w500' + mov.poster_path"
-                                [alt]="mov.original_title" [routerLink]="['/movie', mov.id]" />
+                            <img [src]="'https://image.tmdb.org/t/p/w500' + tv.poster_path"
+                                [alt]="tv.name" [routerLink]="['/tvshows', tv.id]" />
                         </figure>
                         <div class="movie__info">
-                            <h4 class="recommended__movie__title">{{ mov.original_title }}</h4>
-                            <i class="rating" severity="success" pBadge [value]="getPercentage(mov.vote_average) + '%'"></i>
+                            <h4 class="recommended__movie__title">{{ tv.name }}</h4>
+                            <i class="rating" severity="success" pBadge [value]="getPercentage(tv.vote_average) + '%'"></i>
                             <div class="movie__date">
-                                <p class="date">{{ mov.release_date }}</p>
-                                <div (click)="toggleRecommended(mov.id)">
-                                    @if(isInWishlist(mov.id)) {
+                                <p class="date">{{ tv.first_air_date }}</p>
+                                <div (click)="toggleRecommended(tv.id)">
+                                    @if(isInWishlist(tv.id)) {
                                     <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
                                     } @else {
                                     <i class="fa-regular fa-heart"></i>

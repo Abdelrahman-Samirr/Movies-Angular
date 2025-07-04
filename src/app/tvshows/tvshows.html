@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="home">
+        <div class="home__search">
+            <h1>Welcome to our movie app</h1>
+            <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+            <div class="search-bar">
+                <input type="text" [value]="searchInput()" pInputText placeholder="Search and explore..." (input)="searchInput.set($any($event.target).value)"/>
+                <button pButton class="btn" type="button" label="Search" [routerLink]="['/search', searchInput()]"></button>
+            </div>
+        </div>
+        <div class="home__movies">
+            <h2>Now Playing</h2>
+            <div class="movies">
+                @for(item of tvShows(); track item.id){
+                <div class="movie">
+                    <figure><img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path"
+                            alt="{{item.backdrop_path}}" [routerLink]="['/tvshows', item.id]"></figure>
+                    <div class="movie__info">
+                        <h4 class="title">{{item.name}}</h4>
+                        <i class="rating" severity="info" pBadge [value]="getPercentage(item.vote_average) + '%'"></i>
+                        <div class="movie__date">
+                            <p class="date">{{item.first_air_date}}</p>
+                            <div (click)="toggle(item.id)">
+                                @if(isInWishlist(item.id)) {
+                                <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
+                                } @else {
+                                <i class="fa-regular fa-heart"></i>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                }
+                <p-paginator class="slider" (onPageChange)="onPageChange($event)" [rows]="10" [totalRecords]="300" />
+            </div>
+        </div>
+
+    </div>
