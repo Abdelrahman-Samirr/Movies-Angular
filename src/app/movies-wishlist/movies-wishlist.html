@@ -40,7 +40,7 @@
             </figure>
             <div class="detail__info">
                 <div class="detail__header">
-                    <h1 class="title">{{movie.title}}</h1>
+                    <h1 class="title">{{movie.name}}</h1>
                     <div (click)="toggleTv(movie.id)">
                         @if(tvIsInWishlist(movie.id)) {
                         <i class="fa-solid fa-heart" style="color: #FFD43B;"></i>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <p class="date">{{movie.release_date}}</p>
+                <p class="date">{{movie.first_air_date}}</p>
                 <p-rating class="stars" [ngModel]="movie.vote_average / 2" [readonly]="true" />
                 <p class="desc">{{movie.overview}}</p>
             </div>
