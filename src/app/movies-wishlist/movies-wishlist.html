@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="wishlist__header">Wish list</h1>
-        @if(movies().length == 0){
+        @if(movies().length == 0 && tvShows().length ==0){
         <div class="empty">
             <p>No Movies or Tv Shows in Wish list</p>
             <button pButton class="btn" type="button" label="Back to home" routerLink="/home"></button>
